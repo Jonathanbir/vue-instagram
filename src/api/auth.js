@@ -37,3 +37,26 @@ export async function register(email, username, password) {
   //   throw error;
   // }
 }
+
+export async function login(email, password) {
+  // try {
+  const result = await request("/api/auth/local", {
+    method: "POST",
+    auth: false,
+    body: {
+      identifier: email,
+      password,
+    },
+  });
+  setJwtToken(result.jwt);
+  saveUser(result.user);
+  return result.user;
+  // } catch (error) {
+  //   throw error;
+  // }
+}
+
+export function logout() {
+  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("user");
+}

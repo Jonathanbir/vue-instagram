@@ -16,5 +16,9 @@ export const user = {
       const user = await register(email, username, password);
       commit("setUser", user);
     },
+    async loginrUser({ commit }, { email, password }) {
+      const user = await loginr(email, password);
+      commit("setUser", user);
+    },
   },
 };

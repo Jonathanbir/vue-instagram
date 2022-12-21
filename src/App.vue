@@ -2,12 +2,13 @@
   <header class="header">
     <NavBarVue />
   </header>
-  <router-view></router-view>
+  <TheLayout><router-view></router-view></TheLayout>
 </template>
 
 <script setup>
 import "./assets/base.css";
 import NavBarVue from "./components/NavBar.vue";
+import TheLayout from "./components/TheLayout.vue";
 </script>
 
 <style lang="css" scoped>

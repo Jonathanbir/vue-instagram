@@ -36,11 +36,11 @@ const image = ref(null);
 const description = ref("");
 
 async function handleImageUpload(e) {
-  console.log("file", e);
   // 暫時只允許上傳一張圖片
   const imageFile = e.target.files[0];
   if (imageFile) {
     // 設這預覽
+    //靜態方法 URL.createObjectURL() 用於建立一個帶有 URL 的 DOMString 以代表參數中所傳入的物件
     imageObjUrl.value = URL.createObjectURL(imageFile);
     // 設置圖片文件
     image.value = imageFile;

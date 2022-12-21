@@ -1,7 +1,7 @@
 <template>
   <div>
     <PostList>
-      <PostItem v-for="n in 10" />
+      <PostItem v-for="post in posts" :post="post" :key="post.id" />
     </PostList>
     <PostDetails v-if="showPostDetails" />
     <PostUpload v-if="showPostUpload" />
@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
 import PostDetailsVue from "../components/PostDetails.vue";
 import PostList from "../components/PostList.vue";
@@ -19,6 +19,11 @@ import PostUpload from "../components/PostUpload.vue";
 const store = useStore();
 const showPostUpload = computed(() => store.state.showPostUpload);
 const showPostDetails = computed(() => store.state.showPostDetails);
+const posts = computed(() => store.state.post.list);
+
+onMounted(() => {
+  store.dispatch("loadAllPosts");
+});
 </script>
 
 <style lang="css">

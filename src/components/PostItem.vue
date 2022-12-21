@@ -1,27 +1,50 @@
 <template>
   <div class="postItem">
-    <img :src="''" alt="" width="100%" height="100%" style="background: #eee" />
+    <img
+      :src="post.image"
+      @click="$store.dispatch('showPostDetails', post.id)"
+      alt=""
+      width="100%"
+      height="100%"
+      style="background: #eee"
+    />
     <div class="postInfo">
       <div class="postMeta">
-        <TheAvatar />
-        <span>aaa</span>
-        <span class="postPubDate">123</span>
-        <PostActionsVue />
+        <TheAvatar :src="post?.user?.avatar" />
+        <span>{{ post?.user?.name }}</span>
+        <span class="postPubDate">{{ dateToRelative(post.publishedAt) }}</span>
+        <PostActions
+          :likes="post.liked_bies"
+          :comments="post.comments"
+          :favors="post.favored_bies"
+          :likedByMe="post.likedByMe"
+          :favoredByMe="post.favoredByMe"
+          @likeClick="$store.dispatch('toggleLike', post.id)"
+          @favorClick="$store.dispatch('toggleFavor', post.id)"
+          @commentsClick="this.$store.dispatch('showPostDetails', post.id)"
+        />
       </div>
       <div class="postDesc">
-        <p>description</p>
+        <p>
+          {{ post.description }}
+        </p>
       </div>
     </div>
   </div>
 </template>
-
 <script setup>
 import TheAvatar from "../components/TheAvatar.vue";
-import PostActionsVue from "../components/PostActions.vue";
-</script>
+import PostActions from "../components/PostActions.vue";
+import { dateToRelative } from "../utils/date";
 
-<style lang="css" scoped>
-/* postItem */
+defineProps({
+  post: {
+    type: Object,
+    default: {},
+  },
+});
+</script>
+<style scoped>
 .postItem {
   box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
@@ -56,6 +79,7 @@ import PostActionsVue from "../components/PostActions.vue";
   color: #9f9f9f;
   font-size: 14px;
 }
+
 .postActions {
   grid-area: actions;
   justify-self: end;

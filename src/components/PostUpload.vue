@@ -46,6 +46,7 @@ async function handleImageUpload(e) {
     image.value = imageFile;
   }
 }
+
 function publishPost() {
   store.dispatch("uploadPost", {
     image: image.value,

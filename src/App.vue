@@ -1,10 +1,18 @@
 <template>
-  <TheIconVue icon="home" />
+  <header class="header">
+    <NavBarVue />
+  </header>
+  <router-view></router-view>
 </template>
 
 <script setup>
 import "./assets/base.css";
-import TheIconVue from "./components/TheIcon.vue";
+import NavBarVue from "./components/NavBar.vue";
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+.header {
+  height: 80px;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.08);
+}
+</style>

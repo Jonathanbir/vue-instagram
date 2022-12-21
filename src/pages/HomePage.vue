@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-import TheIcon from "../components/TheIcon.vue";
 import PostDetailsVue from "../components/PostDetails.vue";
 import PostList from "../components/PostList.vue";
 import PostItem from "../components/PostItem.vue";

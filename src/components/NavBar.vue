@@ -30,18 +30,18 @@
 <script setup>
 import TheIcon from "./TheIcon.vue";
 import TheAvatar from "./TheAvatar.vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { ref, computed } from "vue";
 
 const showDropdown = ref(false);
-// const store = useStore();
+const store = useStore();
 const router = useRouter();
 
 // const user = computed(() => store.state.user.user);
 
 function publishPost() {
-  // store.commit("changeShowPostUpload", true);
+  store.commit("changeShowPostUpload", true);
 }
 
 async function searchPosts(e) {

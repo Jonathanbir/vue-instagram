@@ -1,9 +1,9 @@
 <template>
-  <TheModal>
+  <TheModal @close="store.commit('changeShowPostUpload', false)">
     <div class="postUpload">
       <label class="upload">
-        <!-- <img v-if="imageObjUrl" :src="imageObjUrl" class="preview" /> -->
-        <TheIcon icon="upload-image" />
+        <img v-if="imageObjUrl" :src="imageObjUrl" class="preview" />
+        <TheIcon v-else icon="upload-image" />
         <input
           type="file"
           accept="image/*"
@@ -17,7 +17,7 @@
           class="postContentInput"
           v-model="description"
         ></textarea>
-        <TheButton class="pubBtn">发布</TheButton>
+        <TheButton class="pubBtn" @click="publishPost">发布</TheButton>
       </div>
     </div>
   </TheModal>
@@ -26,22 +26,23 @@
 import TheModal from "./TheModal.vue";
 import TheIcon from "./TheIcon.vue";
 import TheButton from "./TheButton.vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 import { ref } from "vue";
 
-// const store = useStore();
+const store = useStore();
 const imageObjUrl = ref("");
 
 const image = ref(null);
 const description = ref("");
 
 async function handleImageUpload(e) {
-  // 暂时只允许上传一张图片
+  console.log("file", e);
+  // 暫時只允許上傳一張圖片
   const imageFile = e.target.files[0];
   if (imageFile) {
-    // 设置预览
+    // 設這預覽
     imageObjUrl.value = URL.createObjectURL(imageFile);
-    // 设置图片文件
+    // 設置圖片文件
     image.value = imageFile;
   }
 }
